@@ -23,3 +23,15 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+### Frontend ###
+/src/main/frontend/node/
+/src/main/frontend/node_modules/
+/src/main/frontend/.sass-cache
+/src/main/frontend/connect.lock
+/src/main/frontend/coverage/
+/src/main/frontend/libpeerconnection.log
+/src/main/frontend/npm-debug.log
+/src/main/frontend/yarn-error.log
+/src/main/frontend/testem.log
+/src/main/frontend/typings

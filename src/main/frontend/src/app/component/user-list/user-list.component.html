@@ -1,0 +1,10 @@
+<h3>Users</h3>
+
+<ul class="users">
+  <li *ngFor="let user of users">
+    <a routerLink="/user/{{user.id}}">
+      <span class="badge">{{user.name}}</span> {{user.role}}
+    </a>
+  </li>
+</ul>
+
