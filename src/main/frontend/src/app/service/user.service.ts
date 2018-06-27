@@ -1,14 +1,16 @@
 import {Injectable} from '@angular/core';
-import {HOST, User} from "../model/user";
+import {User} from "../model/user";
 import {Observable} from 'rxjs';
 import {MessageService} from "./messages.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {of} from "rxjs/internal/observable/of";
+import {Page} from "../model/page";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+export const HOST: string = "http://localhost:8080/";
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +24,14 @@ export class UserService {
     private messageService: MessageService
   ) { }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersEndpoint)
+  getUsers(page = 0, size = 5): Observable<Page<User>> {
+    return this.http.get<Page<User>>(this.usersEndpoint,{
+        params: new HttpParams()
+          .set('page', page.toString())
+          .set('size', size.toString())
+      })
       .pipe(
-        catchError(this.handleError('getUsers', []))
+        catchError(this.handleError<Page<User>>('getUsers'))
       );
   }
 
@@ -37,10 +43,32 @@ export class UserService {
       );
   }
 
-  updateHero (user: User): Observable<any> {
+  createUser(user: User): Observable<User> {
+    let userTO = {
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      role: user.role
+    }
+
+    return this.http.post<User>(this.usersEndpoint, userTO, httpOptions).pipe(
+      catchError(this.handleError<User>('createUser'))
+    );
+  }
+
+  updateUser(user: User): Observable<User> {
     const url = `${this.usersEndpoint}/${user.id}`;
     return this.http.put(url, user, httpOptions).pipe(
-      catchError(this.handleError<any>('updateHero'))
+      catchError(this.handleError<any>('updateUser'))
+    );
+  }
+
+  deleteUser(user: User | number): Observable<User> {
+    const id = typeof user === 'number' ? user : user.id;
+    const url = `${this.usersEndpoint}/${id}`;
+
+    return this.http.delete<User>(url, httpOptions).pipe(
+      catchError(this.handleError<User>('deleteUser'))
     );
   }
 

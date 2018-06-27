@@ -1,0 +1,9 @@
+button {
+  margin-right: 5px;
+}
+
+.form-container {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}

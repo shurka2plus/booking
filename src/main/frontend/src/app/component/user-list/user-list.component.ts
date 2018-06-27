@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from "../../model/user";
 import {UserService} from "../../service/user.service";
+import {MatTableDataSource, PageEvent} from "@angular/material";
+import {SelectionModel} from "@angular/cdk/collections";
 
 @Component({
   selector: 'app-user-list',
@@ -9,17 +11,44 @@ import {UserService} from "../../service/user.service";
 })
 export class UserListComponent implements OnInit {
 
-  users: User[];
+  totalLength = 0;
+  pageSize = 5;
+  pageIndex = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  userDataSource = new MatTableDataSource<User>();
+
+
+  selection = new SelectionModel<User>(false, []);
+  displayedColumns = ['select', 'id', 'name', 'email', 'role'];
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.fillUsers();
+    this.loadUsers();
   }
 
-  fillUsers(): void {
-    this.userService.getUsers()
-      .subscribe(users => this.users = users)
+  loadUsers(): void {
+    this.userService.getUsers(this.pageIndex, this.pageSize)
+      .subscribe(page => {
+        this.userDataSource.data = page.content;
+        this.pageSize = page.pageable.pageSize;
+        this.pageIndex = page.pageable.pageNumber;
+        this.totalLength = page.totalElements;
+      });
   }
 
+  deleteUser(user: User) {
+    this.userService.deleteUser(user)
+      .subscribe(() => {
+        this.selection.clear();
+        this.loadUsers();
+      });
+  }
+
+  onPageChange(e: PageEvent) {
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+    this.loadUsers();
+  }
 }

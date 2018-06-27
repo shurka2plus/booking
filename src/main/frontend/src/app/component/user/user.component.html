@@ -1,23 +1,36 @@
-<div *ngIf="user">
+<div *ngIf="user || isNew">
 
-  <h3>User Details</h3>
+  <h3>{{isNew ? "Create New User" : "User Details"}}</h3>
+
+  <div class="form-container">
+    <mat-form-field *ngIf="!isNew">
+      <input matInput placeholder="UserID:" value="{{ user.id }}" disabled>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Name:" [(ngModel)]="user.name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email:" [(ngModel)]="user.email">
+    </mat-form-field>
+    <mat-form-field *ngIf="isNew">
+      <input matInput placeholder="Password:" [(ngModel)]="user.password" type="password">
+    </mat-form-field>
+    <mat-form-field *ngIf="!isNew">
+      <input matInput placeholder="Role:" [(ngModel)]="user.role" disabled>
+    </mat-form-field>
+    <mat-form-field *ngIf="isNew">
+      <mat-select placeholder="Role:" [(ngModel)]="user.role">
+        <mat-option *ngFor="let role of userRoles" [value]="role.name">
+          {{role.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
   <div>
-    <label>ID: </label>{{ user.id }}
+    <button mat-raised-button (click)="goBack()">Go back</button>
+    <button mat-raised-button *ngIf="!isNew" (click)="update()" color="primary">Save</button>
+    <a mat-raised-button *ngIf="!isNew" routerLink="/application/new/{{user.id}}" color="primary">Create Application</a>
+    <button mat-raised-button *ngIf="isNew" (click)="create()" color="primary">Create user</button>
   </div>
-  <div>
-    <label>Name: </label>
-    <input [(ngModel)]="user.name" placeholder="name">
-  </div>
-  <div>
-    <label>Email: </label>
-    <input [(ngModel)]="user.email" placeholder="name">
-  </div>
-  <div>
-    <label>Role: </label>{{ user.role }}
-  </div>
-
-  <button (click)="goBack()">go back</button>
-  <button (click)="save()" class="saveButton">save</button>
-
 </div>

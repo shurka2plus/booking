@@ -10,7 +10,13 @@ import {AppRouterModule} from "./app-router/app-router.module";
 import { ApplicationComponent } from './component/application/application.component';
 import { ApplicationListComponent } from './component/application-list/application-list.component';
 import {HttpClientModule} from "@angular/common/http";
-
+import {MatCheckboxModule, MatPaginatorModule, MatTableModule} from "@angular/material";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatButtonModule} from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -23,9 +29,18 @@ import {HttpClientModule} from "@angular/common/http";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRouterModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

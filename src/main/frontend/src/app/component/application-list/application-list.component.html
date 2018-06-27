@@ -1,3 +1,63 @@
-<p>
-  application-list works!
-</p>
+<h3>Applications</h3>
+<div class="button-row">
+  <a mat-button
+     routerLink="/application/{{selection.hasValue() ? selection.selected[0].id : null}}"
+     [disabled]="!selection.hasValue()">
+    Update application
+  </a>
+  <button mat-button color="warn"
+          (click)="deleteApp(selection.selected[0])"
+          [disabled]="!selection.hasValue()">
+    Delete application
+  </button>
+</div>
+<br>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="appDataSource">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let app"> {{app.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let app"> {{app.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let app"> {{app.type}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contentTypes">
+      <th mat-header-cell *matHeaderCellDef> Content Types </th>
+      <td mat-cell *matCellDef="let app"> {{app.contentTypes}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userId">
+      <th mat-header-cell *matHeaderCellDef> UserID </th>
+      <td mat-cell *matCellDef="let app"> {{app.userId}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="pageSizeOptions"
+                 [length]="totalLength"
+                 [pageSize]="pageSize"
+                 (page)="onPageChange($event)" [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>
+

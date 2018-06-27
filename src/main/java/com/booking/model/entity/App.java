@@ -8,11 +8,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@NamedEntityGraph(
-        name = "appsWithUsersAndContent", attributeNodes = {
-        @NamedAttributeNode("contentTypes"),
-        @NamedAttributeNode("user")
-})
 public class App {
 
     public App() {}

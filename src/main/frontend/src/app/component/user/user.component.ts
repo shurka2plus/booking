@@ -12,7 +12,20 @@ import {UserService} from "../../service/user.service";
 })
 export class UserComponent implements OnInit {
 
-  user: User;
+  userRoles = [
+    {name: 'PUBLISHER', value: 'Publisher'},
+    {name: 'ADOPS', value: 'Operator'},
+    {name: 'ADMIN', value: 'Administrator'}
+  ];
+
+  user: User = {
+    id: 0,
+    name: "",
+    email: "",
+    password: "",
+    role: ""
+  };
+  isNew: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,17 +38,26 @@ export class UserComponent implements OnInit {
   }
 
   getUser(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.userService.getUser(id)
-      .subscribe(user => this.user = user);
+    if(this.route.snapshot.url[1].path === 'new')
+      this.isNew = true;
+    else {
+      let id = this.route.snapshot.paramMap.get('id');
+      this.userService.getUser(+id)
+        .subscribe(user => this.user = user);
+    }
   }
 
   goBack(): void {
     this.location.back();
   }
 
-  save(): void {
-    this.userService.updateHero(this.user)
+  update(): void {
+    this.userService.updateUser(this.user)
+      .subscribe(() => this.goBack());
+  }
+
+  create(): void {
+    this.userService.createUser(this.user)
       .subscribe(() => this.goBack());
   }
 }

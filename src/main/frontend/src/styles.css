@@ -1,26 +1,18 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 /* Application-wide Styles */
 h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
+  color: #1b486f;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 150%;
 }
 h2, h3 {
-  color: #444;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #1f6799;
   font-weight: lighter;
 }
 body {
   margin: 2em;
 }
-body, input[text], button {
-  color: #888;
-  font-family: Cambria, Georgia;
-}
-
-input {
-margin: 2px;
-}
 /* everywhere else */
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Roboto, Arial, sans-serif;
 }

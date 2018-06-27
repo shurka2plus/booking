@@ -1,10 +1,18 @@
 <h1>{{ title }}</h1>
 
+<mat-divider></mat-divider>
+
+<br>
 <nav>
-  <a routerLink="/userlist">Users</a>
-  <a routerLink="/applist">Applications</a>
+  <a mat-raised-button color="primary" routerLink="/userlist">Users</a>
+  <a mat-raised-button color="primary" routerLink="/applist">Applications</a>
 </nav>
+<br>
+
+<mat-divider></mat-divider>
 
 <app-messages></app-messages>
-
 <router-outlet></router-outlet>
+
+
+

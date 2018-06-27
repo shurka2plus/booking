@@ -1,3 +1,28 @@
-<p>
-  application works!
-</p>
+<div *ngIf="app || isNew">
+
+  <h3>{{isNew ? "Create New Application" : "Application Details"}}</h3>
+
+  <div class="form-container">
+    <mat-form-field *ngIf="!isNew">
+      <input matInput placeholder="App ID:" [value]="app.id" disabled>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Name:" [(ngModel)]="app.name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Type:" [(ngModel)]="app.type">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Content Type:" [(ngModel)]="app.contentTypes">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="User ID:" [value]="app.userId" disabled>
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-raised-button (click)="goBack()">Go back</button>
+
+    <button mat-raised-button *ngIf="!isNew" (click)="update()" class="saveButton" color="primary">Save</button>
+    <button mat-raised-button *ngIf="isNew" (click)="create()" class="saveButton" color="primary">Create app</button>
+  </div>
+</div>

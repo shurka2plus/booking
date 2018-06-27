@@ -150,12 +150,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_application_application_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./component/application/application.component */ "./src/app/component/application/application.component.ts");
 /* harmony import */ var _component_application_list_application_list_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./component/application-list/application-list.component */ "./src/app/component/application-list/application-list.component.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -184,7 +186,9 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _app_router_app_router_module__WEBPACK_IMPORTED_MODULE_7__["AppRouterModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"]
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatTableModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatPaginatorModule"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -407,7 +411,7 @@ module.exports = ".users {\r\n  margin: 0 0 2em 0;\r\n  list-style-type: none;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Users</h3>\n\n<ul class=\"users\">\n  <li *ngFor=\"let user of users\">\n    <a routerLink=\"/user/{{user.id}}\">\n      <span class=\"badge\">{{user.name}}</span> {{user.role}}\n    </a>\n  </li>\n</ul>\n\n"
+module.exports = "<h3>Users</h3>\n\n<ul class=\"users\">\n  <li *ngFor=\"let user of users\">\n    <a routerLink=\"/user/{{user.id}}\">\n      <span class=\"badge\">{{user.name}}</span> {{user.role}}\n    </a>\n  </li>\n</ul>\n\n<div class=\"mat-elevation-z8\">\n  <table mat-table [dataSource]=\"dataSource\">\n\n    <!-- Position Column -->\n    <ng-container matColumnDef=\"position\">\n      <th mat-header-cell *matHeaderCellDef> No. </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.position}} </td>\n    </ng-container>\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"name\">\n      <th mat-header-cell *matHeaderCellDef> Name </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.name}} </td>\n    </ng-container>\n\n    <!-- Weight Column -->\n    <ng-container matColumnDef=\"weight\">\n      <th mat-header-cell *matHeaderCellDef> Weight </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.weight}} </td>\n    </ng-container>\n\n    <!-- Symbol Column -->\n    <ng-container matColumnDef=\"symbol\">\n      <th mat-header-cell *matHeaderCellDef> Symbol </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.symbol}} </td>\n    </ng-container>\n\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n  </table>\n\n  <mat-paginator [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\n</div>\n\n"
 
 /***/ }),
 
@@ -423,6 +427,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserListComponent", function() { return UserListComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _service_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/user.service */ "./src/app/service/user.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -434,11 +439,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var UserListComponent = /** @class */ (function () {
     function UserListComponent(userService) {
         this.userService = userService;
+        this.displayedColumns = ['id', 'name', 'email', 'role'];
+        this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"](this.users);
     }
     UserListComponent.prototype.ngOnInit = function () {
+        this.dataSource.paginator = this.paginator;
         this.fillUsers();
     };
     UserListComponent.prototype.fillUsers = function () {
@@ -446,6 +455,10 @@ var UserListComponent = /** @class */ (function () {
         this.userService.getUsers()
             .subscribe(function (users) { return _this.users = users; });
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginator"]),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginator"])
+    ], UserListComponent.prototype, "paginator", void 0);
     UserListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-user-list',
@@ -530,7 +543,7 @@ var UserComponent = /** @class */ (function () {
     };
     UserComponent.prototype.save = function () {
         var _this = this;
-        this.userService.updateHero(this.user)
+        this.userService.updateUser(this.user)
             .subscribe(function () { return _this.goBack(); });
     };
     UserComponent = __decorate([
@@ -554,19 +567,12 @@ var UserComponent = /** @class */ (function () {
 /*!*******************************!*\
   !*** ./src/app/model/user.ts ***!
   \*******************************/
-/*! exports provided: User, HOST */
+/*! exports provided: HOST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function() { return User; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HOST", function() { return HOST; });
-var User = /** @class */ (function () {
-    function User() {
-    }
-    return User;
-}());
-
 var HOST = "http://localhost:8080/";
 
 
@@ -662,9 +668,9 @@ var UserService = /** @class */ (function () {
         return this.http.get(url)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('getUser')));
     };
-    UserService.prototype.updateHero = function (user) {
+    UserService.prototype.updateUser = function (user) {
         var url = this.usersEndpoint + "/" + user.id;
-        return this.http.put(url, user, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateHero')));
+        return this.http.put(url, user, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateUser')));
     };
     UserService.prototype.showError = function (message) {
         this.messageService.add("UserService:  " + message);
