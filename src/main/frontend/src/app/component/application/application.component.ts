@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 import {Application} from "../../model/application";
 import {ApplicationService} from "../../service/application.service";
+import {MessageService} from "../../service/messages.service";
 
 @Component({
   selector: 'app-application',
@@ -11,30 +12,32 @@ import {ApplicationService} from "../../service/application.service";
 })
 export class ApplicationComponent implements OnInit {
 
-  appTypes = {
-    ANDROID: 'Android app',
-    IOS: 'iOS app',
-    WEBSITE: 'Website'
-  };
+  appTypes = [
+    {name: "ANDROID",  value: "Android app"},
+    {name: "IOS", value: "iOS app"},
+    {name: "WEBSITE", value: "Website"}
+  ];
 
-  contentTypes = {
-    IMAGE: 'Image',
-    VIDEO: 'Video',
-    HTML: 'HTML'
-  };
+  contentTypes = [
+    "IMAGE",
+    "VIDEO",
+    "HTML"
+  ];
 
   app: Application = {
-    id: 0,
+    id: null,
     name: "",
-    type: "",
+    type: null,
     contentTypes: [],
-    userId: 0
+    userId: null
   };
+
   isNew: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private appService: ApplicationService,
+    private messageService: MessageService,
     private location: Location
   ) { }
 
@@ -59,13 +62,21 @@ export class ApplicationComponent implements OnInit {
   }
 
   update(): void {
+    this.messageService.clear();
     this.appService.updateApp(this.app)
-      .subscribe(() => this.goBack());
+      .subscribe(() => {
+        if(this.messageService.messages.length === 0)
+          this.goBack();
+      });
   }
 
   create(): void {
-    this.appService.createApp(this.app, this.app.userId)
-      .subscribe(() => this.goBack());
+    this.messageService.clear();
+    this.appService.createApp(this.app)
+      .subscribe(() => {
+        if(this.messageService.messages.length === 0)
+          this.goBack();
+      });
   }
 
 }

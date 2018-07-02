@@ -10,10 +10,18 @@
       <input matInput placeholder="Name:" [(ngModel)]="app.name">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Type:" [(ngModel)]="app.type">
+      <mat-select placeholder="Type:" [(ngModel)]="app.type" [required]="true">
+        <mat-option *ngFor="let appTypeOpt of appTypes" [value]="appTypeOpt.name">
+          {{appTypeOpt.value}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Content Type:" [(ngModel)]="app.contentTypes">
+      <mat-select placeholder="Content Type:" [(ngModel)]="app.contentTypes" multiple>
+        <mat-option *ngFor="let contentTypeOpt of contentTypes" [value]="contentTypeOpt">
+          {{contentTypeOpt}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="User ID:" [value]="app.userId" disabled>

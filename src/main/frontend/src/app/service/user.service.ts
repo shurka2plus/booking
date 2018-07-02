@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {MessageService} from "./messages.service";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
-import {of} from "rxjs/internal/observable/of";
 import {Page} from "../model/page";
 
 const httpOptions = {
@@ -31,7 +30,7 @@ export class UserService {
           .set('size', size.toString())
       })
       .pipe(
-        catchError(this.handleError<Page<User>>('getUsers'))
+        catchError(this.messageService.handleError<Page<User>>('getUsers'))
       );
   }
 
@@ -39,7 +38,7 @@ export class UserService {
     const url = `${this.usersEndpoint}/${id}`;
     return this.http.get<User>(url)
       .pipe(
-        catchError(this.handleError<User>('getUser'))
+        catchError(this.messageService.handleError<User>('getUser'))
       );
   }
 
@@ -49,40 +48,27 @@ export class UserService {
       email: user.email,
       password: user.password,
       role: user.role
-    }
+    };
 
     return this.http.post<User>(this.usersEndpoint, userTO, httpOptions).pipe(
-      catchError(this.handleError<User>('createUser'))
+      catchError(this.messageService.handleError<User>('createUser'))
     );
   }
 
-  updateUser(user: User): Observable<User> {
+  updateUser(user: User): Observable<any> {
     const url = `${this.usersEndpoint}/${user.id}`;
     return this.http.put(url, user, httpOptions).pipe(
-      catchError(this.handleError<any>('updateUser'))
+      catchError(this.messageService.handleError<any>('updateUser'))
     );
   }
 
-  deleteUser(user: User | number): Observable<User> {
+  deleteUser(user: User | number): Observable<any> {
     const id = typeof user === 'number' ? user : user.id;
     const url = `${this.usersEndpoint}/${id}`;
 
-    return this.http.delete<User>(url, httpOptions).pipe(
-      catchError(this.handleError<User>('deleteUser'))
+    return this.http.delete(url, httpOptions).pipe(
+      catchError(this.messageService.handleError<any>('deleteUser'))
     );
   }
 
-  private showError(message: string) {
-    this.messageService.add(`UserService:  ${message}`);
-  }
-
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-
-      this.showError(`${operation} failed: ${error.message}`);
-
-      return of(result as T);
-    };
-  }
 }

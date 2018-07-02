@@ -18,6 +18,7 @@ public class UserRequest extends BaseRequest {
     @NotBlank(groups = {New.class, Existing.class})
     private String name;
 
+    @NotBlank(groups = {New.class, Existing.class})
     @Email(groups = {New.class, Existing.class})
     private String email;
 

@@ -2,9 +2,7 @@ package com.booking.model.dto;
 
 import com.booking.model.enums.AppType;
 import com.booking.model.enums.ContentType;
-import com.booking.model.enums.UserRole;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;

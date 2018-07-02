@@ -38,6 +38,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_user_list_user_list_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component/user-list/user-list.component */ "./src/app/component/user-list/user-list.component.ts");
 /* harmony import */ var _component_application_list_application_list_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component/application-list/application-list.component */ "./src/app/component/application-list/application-list.component.ts");
 /* harmony import */ var _component_user_user_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../component/user/user.component */ "./src/app/component/user/user.component.ts");
+/* harmony import */ var _component_application_application_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../component/application/application.component */ "./src/app/component/application/application.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -49,11 +50,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     { path: '', redirectTo: '/applist', pathMatch: 'full' },
     { path: 'userlist', component: _component_user_list_user_list_component__WEBPACK_IMPORTED_MODULE_2__["UserListComponent"] },
     { path: 'applist', component: _component_application_list_application_list_component__WEBPACK_IMPORTED_MODULE_3__["ApplicationListComponent"] },
-    { path: 'user/:id', component: _component_user_user_component__WEBPACK_IMPORTED_MODULE_4__["UserComponent"] }
+    { path: 'user/:id', component: _component_user_user_component__WEBPACK_IMPORTED_MODULE_4__["UserComponent"] },
+    { path: 'user/new', component: _component_user_user_component__WEBPACK_IMPORTED_MODULE_4__["UserComponent"] },
+    { path: 'application/:id', component: _component_application_application_component__WEBPACK_IMPORTED_MODULE_5__["ApplicationComponent"] },
+    { path: 'application/new/:userId', component: _component_application_application_component__WEBPACK_IMPORTED_MODULE_5__["ApplicationComponent"] }
 ];
 var AppRouterModule = /** @class */ (function () {
     function AppRouterModule() {
@@ -78,7 +83,7 @@ var AppRouterModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "h1 {\r\n  font-size: 1.2em;\r\n  color: #1f6799;\r\n  margin-bottom: 0;\r\n}\r\nh2 {\r\n  font-size: 2em;\r\n  margin-top: 0;\r\n  padding-top: 0;\r\n}\r\nnav a {\r\n  padding: 5px 10px;\r\n  text-decoration: none;\r\n  margin-top: 10px;\r\n  margin-right: 5px;\r\n  display: inline-block;\r\n  background-color: #eee;\r\n  border-radius: 4px;\r\n}\r\nnav a:visited, a:link {\r\n  color: #607d8b;\r\n}\r\nnav a:hover {\r\n  color: #039be5;\r\n  background-color: #cfd8dc;\r\n}\r\nnav a.active {\r\n  color: #039be5;\r\n}\r\n"
+module.exports = "a {\r\n  margin-right: 5px;\r\n}\r\n"
 
 /***/ }),
 
@@ -89,7 +94,7 @@ module.exports = "h1 {\r\n  font-size: 1.2em;\r\n  color: #1f6799;\r\n  margin-b
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>{{ title }}</h1>\n\n<nav>\n  <a routerLink=\"/userlist\">Users</a>\n  <a routerLink=\"/applist\">Applications</a>\n</nav>\n\n<app-messages></app-messages>\n\n<router-outlet></router-outlet>\n"
+module.exports = "<h1>{{ title }}</h1>\n\n<mat-divider></mat-divider>\n\n<br>\n<nav>\n  <a mat-raised-button color=\"primary\" routerLink=\"/userlist\">Users</a>\n  <a mat-raised-button color=\"primary\" routerLink=\"/applist\">Applications</a>\n</nav>\n<br>\n\n<mat-divider></mat-divider>\n\n<app-messages></app-messages>\n<router-outlet></router-outlet>\n\n\n\n"
 
 /***/ }),
 
@@ -151,12 +156,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_application_list_application_list_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./component/application-list/application-list.component */ "./src/app/component/application-list/application-list.component.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/esm5/button.es5.js");
+/* harmony import */ var _angular_material_divider__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material/divider */ "./node_modules/@angular/material/esm5/divider.es5.js");
+/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/esm5/form-field.es5.js");
+/* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material/input */ "./node_modules/@angular/material/esm5/input.es5.js");
+/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/esm5/select.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
+
+
+
 
 
 
@@ -184,11 +201,18 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__["BrowserAnimationsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _app_router_app_router_module__WEBPACK_IMPORTED_MODULE_7__["AppRouterModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatTableModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatPaginatorModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatPaginatorModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatCheckboxModule"],
+                _angular_material_button__WEBPACK_IMPORTED_MODULE_13__["MatButtonModule"],
+                _angular_material_divider__WEBPACK_IMPORTED_MODULE_14__["MatDividerModule"],
+                _angular_material_form_field__WEBPACK_IMPORTED_MODULE_15__["MatFormFieldModule"],
+                _angular_material_input__WEBPACK_IMPORTED_MODULE_16__["MatInputModule"],
+                _angular_material_select__WEBPACK_IMPORTED_MODULE_17__["MatSelectModule"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -208,7 +232,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "table {\r\n  width: 100%;\r\n}\r\n\r\n.mat-column-select {\r\n  overflow: initial;\r\n}\r\n"
 
 /***/ }),
 
@@ -219,7 +243,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  application-list works!\n</p>\n"
+module.exports = "<h3>Applications</h3>\n<div class=\"button-row\">\n  <a mat-button\n     routerLink=\"/application/{{selection.hasValue() ? selection.selected[0].id : null}}\"\n     [disabled]=\"!selection.hasValue()\">\n    Update application\n  </a>\n  <button mat-button color=\"warn\"\n          (click)=\"deleteApp(selection.selected[0])\"\n          [disabled]=\"!selection.hasValue()\">\n    Delete application\n  </button>\n</div>\n<br>\n<div class=\"mat-elevation-z8\">\n  <table mat-table [dataSource]=\"appDataSource\">\n\n    <ng-container matColumnDef=\"select\">\n      <th mat-header-cell *matHeaderCellDef></th>\n      <td mat-cell *matCellDef=\"let row\">\n        <mat-checkbox (click)=\"$event.stopPropagation()\"\n                      (change)=\"$event ? selection.toggle(row) : null\"\n                      [checked]=\"selection.isSelected(row)\">\n        </mat-checkbox>\n      </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"id\">\n      <th mat-header-cell *matHeaderCellDef> ID </th>\n      <td mat-cell *matCellDef=\"let app\"> {{app.id}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"name\">\n      <th mat-header-cell *matHeaderCellDef> Name </th>\n      <td mat-cell *matCellDef=\"let app\"> {{app.name}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"type\">\n      <th mat-header-cell *matHeaderCellDef> Type </th>\n      <td mat-cell *matCellDef=\"let app\"> {{app.type}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"contentTypes\">\n      <th mat-header-cell *matHeaderCellDef> Content Types </th>\n      <td mat-cell *matCellDef=\"let app\"> {{app.contentTypes}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"userId\">\n      <th mat-header-cell *matHeaderCellDef> UserID </th>\n      <td mat-cell *matCellDef=\"let app\"> {{app.userId}} </td>\n    </ng-container>\n\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n  </table>\n\n  <mat-paginator [pageSizeOptions]=\"pageSizeOptions\"\n                 [length]=\"totalLength\"\n                 [pageSize]=\"pageSize\"\n                 (page)=\"onPageChange($event)\" [showFirstLastButtons]=\"true\">\n  </mat-paginator>\n</div>\n\n"
 
 /***/ }),
 
@@ -234,6 +258,9 @@ module.exports = "<p>\n  application-list works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApplicationListComponent", function() { return ApplicationListComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _service_application_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/application.service */ "./src/app/service/application.service.ts");
+/* harmony import */ var _angular_cdk_collections__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/cdk/collections */ "./node_modules/@angular/cdk/esm5/collections.es5.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -244,10 +271,45 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var ApplicationListComponent = /** @class */ (function () {
-    function ApplicationListComponent() {
+    function ApplicationListComponent(appService) {
+        this.appService = appService;
+        this.totalLength = 0;
+        this.pageSize = 5;
+        this.pageIndex = 0;
+        this.pageSizeOptions = [5, 10, 25, 100];
+        this.appDataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatTableDataSource"]();
+        this.selection = new _angular_cdk_collections__WEBPACK_IMPORTED_MODULE_2__["SelectionModel"](false, []);
+        this.displayedColumns = ['select', 'id', 'name', 'type', 'contentTypes', 'userId'];
     }
     ApplicationListComponent.prototype.ngOnInit = function () {
+        this.loadApps();
+    };
+    ApplicationListComponent.prototype.loadApps = function () {
+        var _this = this;
+        this.appService.getApps(this.pageIndex, this.pageSize)
+            .subscribe(function (page) {
+            _this.appDataSource.data = page.content;
+            _this.pageSize = page.pageable.pageSize;
+            _this.pageIndex = page.pageable.pageNumber;
+            _this.totalLength = page.totalElements;
+        });
+    };
+    ApplicationListComponent.prototype.deleteApp = function (app) {
+        var _this = this;
+        this.appService.deleteApp(app)
+            .subscribe(function () {
+            _this.selection.clear();
+            _this.loadApps();
+        });
+    };
+    ApplicationListComponent.prototype.onPageChange = function (e) {
+        this.pageSize = e.pageSize;
+        this.pageIndex = e.pageIndex;
+        this.loadApps();
     };
     ApplicationListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -255,7 +317,7 @@ var ApplicationListComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./application-list.component.html */ "./src/app/component/application-list/application-list.component.html"),
             styles: [__webpack_require__(/*! ./application-list.component.css */ "./src/app/component/application-list/application-list.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_service_application_service__WEBPACK_IMPORTED_MODULE_1__["ApplicationService"]])
     ], ApplicationListComponent);
     return ApplicationListComponent;
 }());
@@ -271,7 +333,7 @@ var ApplicationListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "button {\r\n  margin-right: 5px;\r\n}\r\n\r\n.form-container {\r\n  width: 30%;\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n"
 
 /***/ }),
 
@@ -282,7 +344,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  application works!\n</p>\n"
+module.exports = "<div *ngIf=\"app || isNew\">\n\n  <h3>{{isNew ? \"Create New Application\" : \"Application Details\"}}</h3>\n\n  <div class=\"form-container\">\n    <mat-form-field *ngIf=\"!isNew\">\n      <input matInput placeholder=\"App ID:\" [value]=\"app.id\" disabled>\n    </mat-form-field>\n    <mat-form-field>\n      <input matInput placeholder=\"Name:\" [(ngModel)]=\"app.name\">\n    </mat-form-field>\n    <mat-form-field>\n      <mat-select placeholder=\"Type:\" [(ngModel)]=\"app.type\" [required]=\"true\">\n        <mat-option *ngFor=\"let appTypeOpt of appTypes\" [value]=\"appTypeOpt.name\">\n          {{appTypeOpt.value}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-select placeholder=\"Content Type:\" [(ngModel)]=\"app.contentTypes\" multiple>\n        <mat-option *ngFor=\"let contentTypeOpt of contentTypes\" [value]=\"contentTypeOpt\">\n          {{contentTypeOpt}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n    <mat-form-field>\n      <input matInput placeholder=\"User ID:\" [value]=\"app.userId\" disabled>\n    </mat-form-field>\n  </div>\n  <div>\n    <button mat-raised-button (click)=\"goBack()\">Go back</button>\n\n    <button mat-raised-button *ngIf=\"!isNew\" (click)=\"update()\" class=\"saveButton\" color=\"primary\">Save</button>\n    <button mat-raised-button *ngIf=\"isNew\" (click)=\"create()\" class=\"saveButton\" color=\"primary\">Create app</button>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -297,6 +359,9 @@ module.exports = "<p>\n  application works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApplicationComponent", function() { return ApplicationComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _service_application_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/application.service */ "./src/app/service/application.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -307,10 +372,60 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var ApplicationComponent = /** @class */ (function () {
-    function ApplicationComponent() {
+    function ApplicationComponent(route, appService, location) {
+        this.route = route;
+        this.appService = appService;
+        this.location = location;
+        this.appTypes = [
+            { name: "ANDROID", value: "Android app" },
+            { name: "IOS", value: "iOS app" },
+            { name: "WEBSITE", value: "Website" }
+        ];
+        this.contentTypes = [
+            "IMAGE",
+            "VIDEO",
+            "HTML"
+        ];
+        this.app = {
+            id: 0,
+            name: "",
+            type: "",
+            contentTypes: [],
+            userId: 0
+        };
+        this.isNew = false;
     }
     ApplicationComponent.prototype.ngOnInit = function () {
+        this.getApp();
+    };
+    ApplicationComponent.prototype.getApp = function () {
+        var _this = this;
+        if (this.route.snapshot.url[1].path === 'new') {
+            this.isNew = true;
+            this.app.userId = +this.route.snapshot.paramMap.get('userId');
+        }
+        else {
+            var id = this.route.snapshot.paramMap.get('id');
+            this.appService.getApp(+id)
+                .subscribe(function (app) { return _this.app = app; });
+        }
+    };
+    ApplicationComponent.prototype.goBack = function () {
+        this.location.back();
+    };
+    ApplicationComponent.prototype.update = function () {
+        var _this = this;
+        this.appService.updateApp(this.app)
+            .subscribe(function () { return _this.goBack(); });
+    };
+    ApplicationComponent.prototype.create = function () {
+        var _this = this;
+        this.appService.createApp(this.app, this.app.userId)
+            .subscribe(function () { return _this.goBack(); });
     };
     ApplicationComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -318,7 +433,9 @@ var ApplicationComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./application.component.html */ "./src/app/component/application/application.component.html"),
             styles: [__webpack_require__(/*! ./application.component.css */ "./src/app/component/application/application.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            _service_application_service__WEBPACK_IMPORTED_MODULE_3__["ApplicationService"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_1__["Location"]])
     ], ApplicationComponent);
     return ApplicationComponent;
 }());
@@ -400,7 +517,7 @@ var MessagesComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".users {\r\n  margin: 0 0 2em 0;\r\n  list-style-type: none;\r\n  padding: 0;\r\n  width: 15em;\r\n}\r\n.users li {\r\n  position: relative;\r\n  cursor: pointer;\r\n  background-color: #EEE;\r\n  margin: .5em;\r\n  padding: .3em 0;\r\n  height: 1.6em;\r\n  border-radius: 4px;\r\n}\r\n.users li:hover {\r\n  color: #607D8B;\r\n  background-color: #DDD;\r\n  left: .1em;\r\n}\r\n.users a {\r\n  color: #888;\r\n  text-decoration: none;\r\n  position: relative;\r\n  display: block;\r\n  width: 250px;\r\n}\r\n.users a:hover {\r\n  color:#607D8B;\r\n}\r\n.users .badge {\r\n  display: inline-block;\r\n  font-size: small;\r\n  color: white;\r\n  padding: 0.8em 0.7em 0 0.7em;\r\n  background-color: #607D8B;\r\n  line-height: 1em;\r\n  position: relative;\r\n  left: -1px;\r\n  top: -4px;\r\n  height: 1.8em;\r\n  min-width: 16px;\r\n  text-align: right;\r\n  margin-right: .8em;\r\n  border-radius: 4px 0 0 4px;\r\n}\r\n"
+module.exports = "table {\r\n  width: 100%;\r\n}\r\n\r\n.mat-column-select {\r\n  overflow: initial;\r\n}\r\n"
 
 /***/ }),
 
@@ -411,7 +528,7 @@ module.exports = ".users {\r\n  margin: 0 0 2em 0;\r\n  list-style-type: none;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Users</h3>\n\n<ul class=\"users\">\n  <li *ngFor=\"let user of users\">\n    <a routerLink=\"/user/{{user.id}}\">\n      <span class=\"badge\">{{user.name}}</span> {{user.role}}\n    </a>\n  </li>\n</ul>\n\n<div class=\"mat-elevation-z8\">\n  <table mat-table [dataSource]=\"dataSource\">\n\n    <!-- Position Column -->\n    <ng-container matColumnDef=\"position\">\n      <th mat-header-cell *matHeaderCellDef> No. </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.position}} </td>\n    </ng-container>\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"name\">\n      <th mat-header-cell *matHeaderCellDef> Name </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.name}} </td>\n    </ng-container>\n\n    <!-- Weight Column -->\n    <ng-container matColumnDef=\"weight\">\n      <th mat-header-cell *matHeaderCellDef> Weight </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.weight}} </td>\n    </ng-container>\n\n    <!-- Symbol Column -->\n    <ng-container matColumnDef=\"symbol\">\n      <th mat-header-cell *matHeaderCellDef> Symbol </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.symbol}} </td>\n    </ng-container>\n\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n  </table>\n\n  <mat-paginator [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\n</div>\n\n"
+module.exports = "<h3>Users</h3>\n\n<div class=\"button-row\">\n  <a mat-button routerLink=\"/user/new\">Create user</a>\n  <a mat-button\n     routerLink=\"/user/{{selection.hasValue() ? selection.selected[0].id : null}}\"\n     [disabled]=\"!selection.hasValue()\">\n    Update user\n  </a>\n  <button mat-button color=\"warn\"\n          (click)=\"deleteUser(selection.selected[0])\"\n          [disabled]=\"!selection.hasValue()\">\n    Delete user\n  </button>\n</div>\n<br>\n<div class=\"mat-elevation-z8\">\n  <table mat-table [dataSource]=\"userDataSource\">\n\n    <ng-container matColumnDef=\"select\">\n      <th mat-header-cell *matHeaderCellDef></th>\n      <td mat-cell *matCellDef=\"let row\">\n        <mat-checkbox (click)=\"$event.stopPropagation()\"\n                      (change)=\"$event ? selection.toggle(row) : null\"\n                      [checked]=\"selection.isSelected(row)\">\n        </mat-checkbox>\n      </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"id\">\n      <th mat-header-cell *matHeaderCellDef> ID </th>\n      <td mat-cell *matCellDef=\"let user\"> {{user.id}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"name\">\n      <th mat-header-cell *matHeaderCellDef> Name </th>\n      <td mat-cell *matCellDef=\"let user\"> {{user.name}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"email\">\n      <th mat-header-cell *matHeaderCellDef> Email </th>\n      <td mat-cell *matCellDef=\"let user\"> {{user.email}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"role\">\n      <th mat-header-cell *matHeaderCellDef> Role </th>\n      <td mat-cell *matCellDef=\"let user\"> {{user.role}} </td>\n    </ng-container>\n\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n  </table>\n\n  <mat-paginator [pageSizeOptions]=\"pageSizeOptions\"\n                 [length]=\"totalLength\"\n                 [pageSize]=\"pageSize\"\n                 (page)=\"onPageChange($event)\" [showFirstLastButtons]=\"true\">\n  </mat-paginator>\n</div>\n\n"
 
 /***/ }),
 
@@ -428,6 +545,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _service_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/user.service */ "./src/app/service/user.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_cdk_collections__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/cdk/collections */ "./node_modules/@angular/cdk/esm5/collections.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -440,25 +558,44 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var UserListComponent = /** @class */ (function () {
     function UserListComponent(userService) {
         this.userService = userService;
-        this.displayedColumns = ['id', 'name', 'email', 'role'];
-        this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"](this.users);
+        this.totalLength = 0;
+        this.pageSize = 5;
+        this.pageIndex = 0;
+        this.pageSizeOptions = [5, 10, 25, 100];
+        this.userDataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"]();
+        this.selection = new _angular_cdk_collections__WEBPACK_IMPORTED_MODULE_3__["SelectionModel"](false, []);
+        this.displayedColumns = ['select', 'id', 'name', 'email', 'role'];
     }
     UserListComponent.prototype.ngOnInit = function () {
-        this.dataSource.paginator = this.paginator;
-        this.fillUsers();
+        this.loadUsers();
     };
-    UserListComponent.prototype.fillUsers = function () {
+    UserListComponent.prototype.loadUsers = function () {
         var _this = this;
-        this.userService.getUsers()
-            .subscribe(function (users) { return _this.users = users; });
+        this.userService.getUsers(this.pageIndex, this.pageSize)
+            .subscribe(function (page) {
+            _this.userDataSource.data = page.content;
+            _this.pageSize = page.pageable.pageSize;
+            _this.pageIndex = page.pageable.pageNumber;
+            _this.totalLength = page.totalElements;
+        });
     };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginator"]),
-        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginator"])
-    ], UserListComponent.prototype, "paginator", void 0);
+    UserListComponent.prototype.deleteUser = function (user) {
+        var _this = this;
+        this.userService.deleteUser(user)
+            .subscribe(function () {
+            _this.selection.clear();
+            _this.loadUsers();
+        });
+    };
+    UserListComponent.prototype.onPageChange = function (e) {
+        this.pageSize = e.pageSize;
+        this.pageIndex = e.pageIndex;
+        this.loadUsers();
+    };
     UserListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-user-list',
@@ -481,7 +618,7 @@ var UserListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "label {\r\n  display: inline-block;\r\n  width: 3em;\r\n  margin: .5em 0;\r\n  color: #607D8B;\r\n  font-weight: bold;\r\n}\r\ninput {\r\n  height: 2em;\r\n  font-size: 1em;\r\n  padding-left: .4em;\r\n  border-radius: 4px;\r\n}\r\nbutton {\r\n  margin-top: 20px;\r\n  font-family: Arial;\r\n  background-color: #eee;\r\n  border: none;\r\n  padding: 5px 10px;\r\n  border-radius: 4px;\r\n  cursor: pointer; cursor: hand;\r\n}\r\nbutton:hover {\r\n  background-color: #cfd8dc;\r\n}\r\nbutton:disabled {\r\n  background-color: #eee;\r\n  color: #ccc;\r\n  cursor: auto;\r\n}\r\n.saveButton {\r\n  margin-left: 5px;\r\n  background-color: #607D8B;\r\n  color: #ffffff;\r\n  text-align: right;\r\n}\r\n"
+module.exports = "button {\r\n  margin-right: 5px;\r\n}\r\n\r\n.form-container {\r\n  width: 30%;\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n"
 
 /***/ }),
 
@@ -492,7 +629,7 @@ module.exports = "label {\r\n  display: inline-block;\r\n  width: 3em;\r\n  marg
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"user\">\n\n  <h3>User Details</h3>\n\n  <div>\n    <label>ID: </label>{{ user.id }}\n  </div>\n  <div>\n    <label>Name: </label>\n    <input [(ngModel)]=\"user.name\" placeholder=\"name\">\n  </div>\n  <div>\n    <label>Email: </label>\n    <input [(ngModel)]=\"user.email\" placeholder=\"name\">\n  </div>\n  <div>\n    <label>Role: </label>{{ user.role }}\n  </div>\n\n  <button (click)=\"goBack()\">go back</button>\n  <button (click)=\"save()\" class=\"saveButton\">save</button>\n\n</div>\n"
+module.exports = "<div *ngIf=\"user || isNew\">\n\n  <h3>{{isNew ? \"Create New User\" : \"User Details\"}}</h3>\n\n  <div class=\"form-container\">\n    <mat-form-field *ngIf=\"!isNew\">\n      <input matInput placeholder=\"UserID:\" [value]=\"user.id\" disabled>\n    </mat-form-field>\n    <mat-form-field>\n      <input matInput placeholder=\"Name:\" [(ngModel)]=\"user.name\">\n    </mat-form-field>\n    <mat-form-field>\n      <input matInput placeholder=\"Email:\" [(ngModel)]=\"user.email\">\n    </mat-form-field>\n    <mat-form-field *ngIf=\"isNew\">\n      <input matInput placeholder=\"Password:\" [(ngModel)]=\"user.password\" type=\"password\">\n    </mat-form-field>\n    <mat-form-field>\n      <mat-select placeholder=\"Role:\" [(ngModel)]=\"user.role\" [required]=\"true\">\n        <mat-option *ngFor=\"let roleOpt of userRoles\" [value]=\"roleOpt.name\">\n          {{roleOpt.value}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </div>\n\n  <div>\n    <button mat-raised-button (click)=\"goBack()\">Go back</button>\n    <button mat-raised-button *ngIf=\"!isNew\" (click)=\"update()\" color=\"primary\">Save</button>\n    <a mat-raised-button *ngIf=\"!isNew\" routerLink=\"/application/new/{{user.id}}\" color=\"primary\">Create Application</a>\n    <button mat-raised-button *ngIf=\"isNew\" (click)=\"create()\" color=\"primary\">Create user</button>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -528,22 +665,43 @@ var UserComponent = /** @class */ (function () {
         this.route = route;
         this.userService = userService;
         this.location = location;
+        this.userRoles = [
+            { name: 'PUBLISHER', value: 'Publisher' },
+            { name: 'ADOPS', value: 'Operator' },
+            { name: 'ADMIN', value: 'Administrator' }
+        ];
+        this.user = {
+            id: 0,
+            name: "",
+            email: "",
+            password: "",
+            role: this.userRoles[0].name
+        };
     }
     UserComponent.prototype.ngOnInit = function () {
         this.getUser();
     };
     UserComponent.prototype.getUser = function () {
         var _this = this;
-        var id = +this.route.snapshot.paramMap.get('id');
-        this.userService.getUser(id)
-            .subscribe(function (user) { return _this.user = user; });
+        if (this.route.snapshot.url[1].path === 'new')
+            this.isNew = true;
+        else {
+            var id = this.route.snapshot.paramMap.get('id');
+            this.userService.getUser(+id)
+                .subscribe(function (user) { return _this.user = user; });
+        }
     };
     UserComponent.prototype.goBack = function () {
         this.location.back();
     };
-    UserComponent.prototype.save = function () {
+    UserComponent.prototype.update = function () {
         var _this = this;
         this.userService.updateUser(this.user)
+            .subscribe(function () { return _this.goBack(); });
+    };
+    UserComponent.prototype.create = function () {
+        var _this = this;
+        this.userService.createUser(this.user)
             .subscribe(function () { return _this.goBack(); });
     };
     UserComponent = __decorate([
@@ -563,17 +721,87 @@ var UserComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/model/user.ts":
-/*!*******************************!*\
-  !*** ./src/app/model/user.ts ***!
-  \*******************************/
-/*! exports provided: HOST */
+/***/ "./src/app/service/application.service.ts":
+/*!************************************************!*\
+  !*** ./src/app/service/application.service.ts ***!
+  \************************************************/
+/*! exports provided: HOST, ApplicationService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HOST", function() { return HOST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApplicationService", function() { return ApplicationService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _messages_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./messages.service */ "./src/app/service/messages.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' })
+};
 var HOST = "http://localhost:8080/";
+var ApplicationService = /** @class */ (function () {
+    function ApplicationService(http, messageService) {
+        this.http = http;
+        this.messageService = messageService;
+        this.appsEndpoint = HOST + 'api/apps';
+        this.usersEndpoint = HOST + 'api/users';
+    }
+    ApplicationService.prototype.getApps = function (page, size) {
+        if (page === void 0) { page = 0; }
+        if (size === void 0) { size = 5; }
+        return this.http.get(this.appsEndpoint, {
+            params: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]()
+                .set('page', page.toString())
+                .set('size', size.toString())
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.messageService.handleError('getApps')));
+    };
+    ApplicationService.prototype.getApp = function (id) {
+        var url = this.appsEndpoint + "/" + id;
+        return this.http.get(url)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.messageService.handleError('getApplication')));
+    };
+    ApplicationService.prototype.createApp = function (app, userId) {
+        var appTO = {
+            name: app.name,
+            type: app.type,
+            contentTypes: app.contentTypes
+        };
+        var url = this.usersEndpoint + "/" + userId + "/apps";
+        return this.http.post(url, appTO, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.messageService.handleError('createApp')));
+    };
+    ApplicationService.prototype.updateApp = function (app) {
+        var url = this.usersEndpoint + "/" + app.userId + "/apps/" + app.id;
+        return this.http.put(url, app, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.messageService.handleError('updateApp')));
+    };
+    ApplicationService.prototype.deleteApp = function (app) {
+        var url = this.usersEndpoint + "/" + app.userId + "/apps/" + app.id;
+        return this.http.delete(url, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.messageService.handleError('deleteApp')));
+    };
+    ApplicationService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+            _messages_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"]])
+    ], ApplicationService);
+    return ApplicationService;
+}());
+
 
 
 /***/ }),
@@ -589,12 +817,15 @@ var HOST = "http://localhost:8080/";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageService", function() { return MessageService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs_internal_observable_of__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/internal/observable/of */ "./node_modules/rxjs/internal/observable/of.js");
+/* harmony import */ var rxjs_internal_observable_of__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_observable_of__WEBPACK_IMPORTED_MODULE_1__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 var MessageService = /** @class */ (function () {
     function MessageService() {
@@ -605,6 +836,20 @@ var MessageService = /** @class */ (function () {
     };
     MessageService.prototype.clear = function () {
         this.messages = [];
+    };
+    MessageService.prototype.handleError = function (operation, result) {
+        var _this = this;
+        if (operation === void 0) { operation = 'operation'; }
+        return function (errorResponse) {
+            console.error(errorResponse);
+            var error = errorResponse.error;
+            _this.add("Operation " + operation + " failed.");
+            if (error.message)
+                _this.add(error.message);
+            if (typeof error.errors !== 'undefined' && error.errors.length > 0)
+                error.errors.forEach(function (elem) { return _this.add(elem.field + " " + elem.defaultMessage); });
+            return Object(rxjs_internal_observable_of__WEBPACK_IMPORTED_MODULE_1__["of"])(result);
+        };
     };
     MessageService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -622,19 +867,17 @@ var MessageService = /** @class */ (function () {
 /*!*****************************************!*\
   !*** ./src/app/service/user.service.ts ***!
   \*****************************************/
-/*! exports provided: UserService */
+/*! exports provided: HOST, UserService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HOST", function() { return HOST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _model_user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/user */ "./src/app/model/user.ts");
-/* harmony import */ var _messages_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messages.service */ "./src/app/service/messages.service.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var rxjs_internal_observable_of__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/internal/observable/of */ "./node_modules/rxjs/internal/observable/of.js");
-/* harmony import */ var rxjs_internal_observable_of__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_observable_of__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _messages_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./messages.service */ "./src/app/service/messages.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -648,48 +891,55 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
-
 var httpOptions = {
-    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({ 'Content-Type': 'application/json' })
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' })
 };
+var HOST = "http://localhost:8080/";
 var UserService = /** @class */ (function () {
     function UserService(http, messageService) {
         this.http = http;
         this.messageService = messageService;
-        this.usersEndpoint = _model_user__WEBPACK_IMPORTED_MODULE_1__["HOST"] + 'api/users';
+        this.usersEndpoint = HOST + 'api/users';
     }
-    UserService.prototype.getUsers = function () {
-        return this.http.get(this.usersEndpoint)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('getUsers', [])));
+    UserService.prototype.getUsers = function (page, size) {
+        if (page === void 0) { page = 0; }
+        if (size === void 0) { size = 5; }
+        return this.http.get(this.usersEndpoint, {
+            params: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]()
+                .set('page', page.toString())
+                .set('size', size.toString())
+        })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.messageService.handleError('getUsers')));
     };
     UserService.prototype.getUser = function (id) {
         var url = this.usersEndpoint + "/" + id;
         return this.http.get(url)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('getUser')));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.messageService.handleError('getUser')));
+    };
+    UserService.prototype.createUser = function (user) {
+        var userTO = {
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            role: user.role
+        };
+        return this.http.post(this.usersEndpoint, userTO, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.messageService.handleError('createUser')));
     };
     UserService.prototype.updateUser = function (user) {
         var url = this.usersEndpoint + "/" + user.id;
-        return this.http.put(url, user, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateUser')));
+        return this.http.put(url, user, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.messageService.handleError('updateUser')));
     };
-    UserService.prototype.showError = function (message) {
-        this.messageService.add("UserService:  " + message);
-    };
-    UserService.prototype.handleError = function (operation, result) {
-        var _this = this;
-        if (operation === void 0) { operation = 'operation'; }
-        return function (error) {
-            console.error(error);
-            _this.showError(operation + " failed: " + error.message);
-            return Object(rxjs_internal_observable_of__WEBPACK_IMPORTED_MODULE_5__["of"])(result);
-        };
+    UserService.prototype.deleteUser = function (user) {
+        var id = typeof user === 'number' ? user : user.id;
+        var url = this.usersEndpoint + "/" + id;
+        return this.http.delete(url, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.messageService.handleError('deleteUser')));
     };
     UserService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"],
-            _messages_service__WEBPACK_IMPORTED_MODULE_2__["MessageService"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+            _messages_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"]])
     ], UserService);
     return UserService;
 }());

@@ -70,11 +70,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-        </dependency>
     </dependencies>
 
 	<build>
@@ -98,7 +93,7 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <nodeVersion>latest-carbon</nodeVersion>
+                            <nodeVersion>v8.11.3</nodeVersion>
                             <nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
                             <npmVersion>5.6.0</npmVersion>
                             <npmDownloadRoot>https://registry.npmjs.org/npm/-/</npmDownloadRoot>

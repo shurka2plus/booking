@@ -4,7 +4,7 @@
 
   <div class="form-container">
     <mat-form-field *ngIf="!isNew">
-      <input matInput placeholder="UserID:" value="{{ user.id }}" disabled>
+      <input matInput placeholder="UserID:" [value]="user.id" disabled>
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Name:" [(ngModel)]="user.name">
@@ -15,13 +15,10 @@
     <mat-form-field *ngIf="isNew">
       <input matInput placeholder="Password:" [(ngModel)]="user.password" type="password">
     </mat-form-field>
-    <mat-form-field *ngIf="!isNew">
-      <input matInput placeholder="Role:" [(ngModel)]="user.role" disabled>
-    </mat-form-field>
-    <mat-form-field *ngIf="isNew">
-      <mat-select placeholder="Role:" [(ngModel)]="user.role">
-        <mat-option *ngFor="let role of userRoles" [value]="role.name">
-          {{role.value}}
+    <mat-form-field>
+      <mat-select placeholder="Role:" [(ngModel)]="user.role" [required]="true">
+        <mat-option *ngFor="let roleOpt of userRoles" [value]="roleOpt.name">
+          {{roleOpt.value}}
         </mat-option>
       </mat-select>
     </mat-form-field>

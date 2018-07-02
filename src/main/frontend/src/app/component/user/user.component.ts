@@ -4,6 +4,7 @@ import {Location} from '@angular/common';
 
 import {User} from '../../model/user';
 import {UserService} from "../../service/user.service";
+import {MessageService} from "../../service/messages.service";
 
 @Component({
   selector: 'app-user',
@@ -19,17 +20,19 @@ export class UserComponent implements OnInit {
   ];
 
   user: User = {
-    id: 0,
+    id: null,
     name: "",
     email: "",
     password: "",
-    role: ""
+    role: null
   };
-  isNew: boolean;
+
+  isNew: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
+    private messageService: MessageService,
     private location: Location
   ) { }
 
@@ -52,12 +55,20 @@ export class UserComponent implements OnInit {
   }
 
   update(): void {
+    this.messageService.clear();
     this.userService.updateUser(this.user)
-      .subscribe(() => this.goBack());
+      .subscribe(() => {
+        if(this.messageService.messages.length === 0)
+          this.goBack();
+      });
   }
 
   create(): void {
+    this.messageService.clear();
     this.userService.createUser(this.user)
-      .subscribe(() => this.goBack());
+      .subscribe(() => {
+        if(this.messageService.messages.length === 0)
+          this.goBack();
+      });
   }
 }

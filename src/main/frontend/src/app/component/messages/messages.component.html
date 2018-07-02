@@ -1,8 +1,10 @@
 <div *ngIf="messageService.messages.length">
 
-  <h2>Messages</h2>
+  <h3>Messages</h3>
+  <div class="errorText" *ngFor='let message of messageService.messages'> {{message}} </div>
   <button class="clear"
-          (click)="messageService.clear()">clear</button>
-  <div *ngFor='let message of messageService.messages'> {{message}} </div>
-
+          (click)="messageService.clear()">
+    Clear
+  </button>
+  <mat-divider></mat-divider>
 </div>
