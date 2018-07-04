@@ -14,7 +14,7 @@ public interface AppService {
 
     Page<AppResponse> findAllPaged(int page, int size);
 
-    List<AppResponse> findUserApps(Long userId);
+    Page<AppResponse> findUserAppsPaged(Long userId, int page, int size);
 
     AppResponse create(AppRequest app, Long userId);
 

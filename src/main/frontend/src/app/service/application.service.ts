@@ -5,11 +5,12 @@ import {Page} from "../model/page";
 import {Observable} from "rxjs/index";
 import {catchError} from "rxjs/operators";
 import {Application} from "../model/application";
+import {HOST} from "../constants";
+import {AuthService} from "./auth.service";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-export const HOST: string = "http://localhost:8080/";
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +22,18 @@ export class ApplicationService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService
   ) { }
 
-  getApps(page = 0, size = 5): Observable<Page<Application>> {
-    return this.http.get<Page<Application>>(this.appsEndpoint,{
+  getApps(page = 0, size = 5, isPublisher : boolean): Observable<Page<Application>> {
+    const id = this.authService.principal.id;
+    let endpoint = this.appsEndpoint;
+
+    if(isPublisher)
+      endpoint = `${this.usersEndpoint}/${id}/apps`;
+
+    return this.http.get<Page<Application>>(endpoint,{
       params: new HttpParams()
         .set('page', page.toString())
         .set('size', size.toString())

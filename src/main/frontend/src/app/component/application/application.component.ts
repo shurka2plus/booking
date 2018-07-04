@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Application} from "../../model/application";
 import {ApplicationService} from "../../service/application.service";
 import {MessageService} from "../../service/messages.service";
+import {APP_TYPES, CONTENT_TYPES} from "../../constants";
 
 @Component({
   selector: 'app-application',
@@ -12,17 +13,8 @@ import {MessageService} from "../../service/messages.service";
 })
 export class ApplicationComponent implements OnInit {
 
-  appTypes = [
-    {name: "ANDROID",  value: "Android app"},
-    {name: "IOS", value: "iOS app"},
-    {name: "WEBSITE", value: "Website"}
-  ];
-
-  contentTypes = [
-    "IMAGE",
-    "VIDEO",
-    "HTML"
-  ];
+  appTypes = APP_TYPES;
+  contentTypes = CONTENT_TYPES;
 
   app: Application = {
     id: null,
@@ -38,7 +30,8 @@ export class ApplicationComponent implements OnInit {
     private route: ActivatedRoute,
     private appService: ApplicationService,
     private messageService: MessageService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -75,7 +68,7 @@ export class ApplicationComponent implements OnInit {
     this.appService.createApp(this.app)
       .subscribe(() => {
         if(this.messageService.messages.length === 0)
-          this.goBack();
+          this.router.navigateByUrl('/applist')
       });
   }
 

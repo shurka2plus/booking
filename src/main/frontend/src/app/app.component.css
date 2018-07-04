@@ -1,3 +1,11 @@
 a {
   margin-right: 5px;
 }
+
+.navButtonsGroup {
+  float: left;
+}
+
+.loginGroup {
+  float: right;
+}

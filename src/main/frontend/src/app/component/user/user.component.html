@@ -15,19 +15,23 @@
     <mat-form-field *ngIf="isNew">
       <input matInput placeholder="Password:" [(ngModel)]="user.password" type="password">
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field *ngIf="auth(['ROLE_ADMIN'])">
       <mat-select placeholder="Role:" [(ngModel)]="user.role" [required]="true">
         <mat-option *ngFor="let roleOpt of userRoles" [value]="roleOpt.name">
           {{roleOpt.value}}
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+    <mat-form-field *ngIf="auth(['ROLE_ADOPS'])">
+      <input matInput placeholder="Role:" [(ngModel)]="user.role" disabled>
+    </mat-form-field>
   </div>
 
   <div>
     <button mat-raised-button (click)="goBack()">Go back</button>
     <button mat-raised-button *ngIf="!isNew" (click)="update()" color="primary">Save</button>
-    <a mat-raised-button *ngIf="!isNew" routerLink="/application/new/{{user.id}}" color="primary">Create Application</a>
+    <a mat-raised-button *ngIf="!isNew && auth(['ROLE_PUBLISHER','ROLE_ADOPS'])" routerLink="/application/new/{{user.id}}" color="primary">Create Application</a>
     <button mat-raised-button *ngIf="isNew" (click)="create()" color="primary">Create user</button>
   </div>
 </div>

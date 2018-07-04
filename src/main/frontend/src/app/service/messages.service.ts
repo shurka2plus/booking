@@ -21,21 +21,23 @@ export class MessageService {
 
       console.error(errorResponse);
 
-      const error = errorResponse.error;
+
       this.add(`Operation ${operation} failed.`);
 
       this.add("Details:");
 
-      if (typeof error.errors !== 'undefined' && error.errors.length > 0)
-        error.errors.forEach(
-          (elem) => this.add(`${elem.field} ${elem.defaultMessage}`)
-        );
-      else {
-        if(error.message)
-          this.add(error.message);
+      const error = errorResponse.error;
+
+      if(error) {
+        if (typeof error.errors !== 'undefined' && error.errors.length > 0)
+          error.errors.forEach(
+            (elem) => this.add(`${elem.field} ${elem.defaultMessage}`)
+          );
         else
-          this.add(errorResponse.message);
-      }
+          this.add(error.message);
+      } else
+        this.add(errorResponse.message);
+
       return of(result as T);
     };
   }

@@ -1,11 +1,16 @@
 <h3>Applications</h3>
 <div class="button-row">
-  <a mat-button
+  <a mat-button *ngIf="auth(['ROLE_PUBLISHER'])"
+          routerLink="/application/new/{{currentUserId}}">
+    Create app
+  </a>
+  <a *ngIf="auth(['ROLE_PUBLISHER','ROLE_ADOPS'])" mat-button
      routerLink="/application/{{selection.hasValue() ? selection.selected[0].id : null}}"
      [disabled]="!selection.hasValue()">
     Update application
   </a>
-  <button mat-button color="warn"
+  <button *ngIf="auth(['ROLE_PUBLISHER','ROLE_ADOPS'])"
+          mat-button color="warn"
           (click)="deleteApp(selection.selected[0])"
           [disabled]="!selection.hasValue()">
     Delete application

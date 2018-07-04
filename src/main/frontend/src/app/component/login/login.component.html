@@ -1,0 +1,15 @@
+<div align="center">
+<h3>Login form</h3>
+  <div class="alert" [hidden]="!error">
+    There was a problem logging in. Please try again.
+  </div>
+<form role="form" (submit)="login()" class="form-container">
+  <mat-form-field>
+    <input matInput placeholder="Email:" [(ngModel)]="credentials.username" name="username">
+  </mat-form-field>
+  <mat-form-field >
+    <input matInput placeholder="Password:" [(ngModel)]="credentials.password" type="password" name="password">
+  </mat-form-field>
+  <button mat-raised-button type="submit">Submit</button>
+</form>
+</div>

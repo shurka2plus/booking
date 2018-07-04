@@ -54,12 +54,12 @@ public class AppServiceImpl implements AppService {
     }
 
     @Override
-    public List<AppResponse> findUserApps(Long userId) {
+    public Page<AppResponse> findUserAppsPaged(Long userId, int page, int size) {
         User user = userService.getUserById(userId);
-        List<App> userApps = appRepository.findAllByUser(user);
-        return userApps.stream()
-                .map(app -> modelMapper.map(app, AppResponse.class))
-                .collect(Collectors.toList());
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<App> userApps = appRepository.findAllByUser(user, pageable);
+        return userApps.map(app -> modelMapper.map(app, AppResponse.class));
     }
 
     @Transactional

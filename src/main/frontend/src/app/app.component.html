@@ -4,10 +4,17 @@
 
 <br>
 <nav>
-  <a mat-raised-button color="primary" routerLink="/userlist">Users</a>
-  <a mat-raised-button color="primary" routerLink="/applist">Applications</a>
+  <div class="navButtonsGroup">
+    <a *ngIf="auth(['ROLE_PUBLISHER'])" mat-raised-button color="primary" routerLink="/user/current">User Details</a>
+    <a *ngIf="auth(['ROLE_ADMIN','ROLE_ADOPS'])" mat-raised-button color="primary" routerLink="/userlist">Users</a>
+    <a *ngIf="auth()" mat-raised-button color="primary" routerLink="/applist">Applications</a>
+  </div>
+  <div class="loginGroup">
+    <a *ngIf="!auth()" mat-button routerLink="/login">Login</a>
+    <a mat-button (click)="logout()">Logout</a>
+  </div>
 </nav>
-<br>
+<br><br><br>
 
 <mat-divider></mat-divider>
 

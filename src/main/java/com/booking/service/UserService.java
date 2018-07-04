@@ -4,13 +4,14 @@ import com.booking.model.dto.UserRequest;
 import com.booking.model.dto.UserResponse;
 import com.booking.model.entity.User;
 import org.springframework.data.domain.Page;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface UserService {
 
     UserResponse findById(Long id);
+
+    UserResponse findByEmail(String email);
 
     List<UserResponse> findAll();
 
@@ -22,6 +23,10 @@ public interface UserService {
 
     void delete(Long id);
 
+    void delete(Long id, String adOpsName);
+
     User getUserById(Long id);
+
+    void validateUserById(Long id);
 
 }

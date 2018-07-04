@@ -5,6 +5,8 @@ import {Location} from '@angular/common';
 import {User} from '../../model/user';
 import {UserService} from "../../service/user.service";
 import {MessageService} from "../../service/messages.service";
+import {USER_ROLES} from "../../constants";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-user',
@@ -13,11 +15,7 @@ import {MessageService} from "../../service/messages.service";
 })
 export class UserComponent implements OnInit {
 
-  userRoles = [
-    {name: 'PUBLISHER', value: 'Publisher'},
-    {name: 'ADOPS', value: 'Operator'},
-    {name: 'ADMIN', value: 'Administrator'}
-  ];
+  userRoles = USER_ROLES;
 
   user: User = {
     id: null,
@@ -33,6 +31,7 @@ export class UserComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private messageService: MessageService,
+    private authService: AuthService,
     private location: Location
   ) { }
 
@@ -41,9 +40,16 @@ export class UserComponent implements OnInit {
   }
 
   getUser(): void {
-    if(this.route.snapshot.url[1].path === 'new')
+    if(this.route.snapshot.url[1].path === 'new') {
       this.isNew = true;
-    else {
+      if(this.authService.auth(['ROLE_ADOPS']))
+        this.user.role = 'ROLE_PUBLISHER';
+
+    } else if(this.route.snapshot.url[1].path === 'current') {
+      this.userService.getUserByEmail(this.authService.principal.username)
+        .subscribe(user => this.user = user);
+
+    } else {
       let id = this.route.snapshot.paramMap.get('id');
       this.userService.getUser(+id)
         .subscribe(user => this.user = user);
@@ -70,5 +76,9 @@ export class UserComponent implements OnInit {
         if(this.messageService.messages.length === 0)
           this.goBack();
       });
+  }
+
+  auth(roles : string[] = undefined){
+    return this.authService.auth(roles);
   }
 }

@@ -5,11 +5,11 @@ import {MessageService} from "./messages.service";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {Page} from "../model/page";
+import {HOST} from "../constants";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-export const HOST: string = "http://localhost:8080/";
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +42,14 @@ export class UserService {
       );
   }
 
+  getUserByEmail(email: string): Observable<User> {
+    const url = `${this.usersEndpoint}/email/${email}`;
+    return this.http.get<User>(url)
+      .pipe(
+        catchError(this.messageService.handleError<User>('getUser'))
+      );
+  }
+
   createUser(user: User): Observable<User> {
     let userTO = {
       name: user.name,
@@ -63,7 +71,7 @@ export class UserService {
   }
 
   deleteUser(user: User | number): Observable<any> {
-    const id = typeof user === 'number' ? user : user.id;
+    const id = (typeof user === 'number') ? user : user.id;
     const url = `${this.usersEndpoint}/${id}`;
 
     return this.http.delete(url, httpOptions).pipe(
